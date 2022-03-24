@@ -10,7 +10,7 @@ import (
 
 func main() {
 	var wg sync.WaitGroup
-	var c chan int = make(chan int, 5)
+	c := make(chan interface{}, 5)
 
 	for i := 0; i < 10; i++ {
 		c <- i
@@ -21,7 +21,7 @@ func main() {
 	wg.Wait()
 }
 
-func doSomething(i int, wg *sync.WaitGroup, c chan int) {
+func doSomething(i int, wg *sync.WaitGroup, c chan interface{}) {
 	defer wg.Done()
 	//Dummy process - simulate long process
 	fmt.Printf("Started...%v \n", i)
